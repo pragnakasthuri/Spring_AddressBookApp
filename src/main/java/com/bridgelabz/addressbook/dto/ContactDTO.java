@@ -1,18 +1,14 @@
-package com.bridgelabz.addressbook.model;
+package com.bridgelabz.addressbook.dto;
 
-import com.bridgelabz.addressbook.dto.ContactDTO;
+public class ContactDTO {
 
-public class Contact {
-    
-    private int contactId;
-    private String firstName;
-    private String lastName;
+    public String firstName;
+    public String lastName;
 
-    public Contact(int contactId, ContactDTO contactDTO) {
+    public ContactDTO(String firstName, String lastName) {
         super();
-        this.contactId =  contactId;
-        this.firstName =  contactDTO.firstName;
-        this.lastName = contactDTO.lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -33,7 +29,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "ContactDTO{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';

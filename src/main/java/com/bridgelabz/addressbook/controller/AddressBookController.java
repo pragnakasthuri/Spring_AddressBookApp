@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook.controller;
 
+import com.bridgelabz.addressbook.dto.ContactDTO;
 import com.bridgelabz.addressbook.model.Contact;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,14 +10,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/addressbook")
 public class AddressBookController {
 
-    @GetMapping("/get")
+    @RequestMapping("/get")
     public ResponseEntity<String> getContactData(){
-        return new ResponseEntity<String>("Get Call Success", HttpStatus.OK);
+        Contact contact = null;
+        contact = new Contact(1, new ContactDTO("Pragna", "Kasthuri"));
+        return new ResponseEntity<String>("Get Call Success" +contact, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<String> getContactDataById(@PathVariable("id") int id) {
-        return new ResponseEntity<String>("Get Call Success For Id" +id, HttpStatus.OK);
+        Contact contact = null;
+        contact = new Contact(1, new ContactDTO("Pragna", "Kasthuri"));
+        return new ResponseEntity<String>("Get Call Success For Id " +id  +contact, HttpStatus.OK);
     }
 
     @PostMapping("/create")
