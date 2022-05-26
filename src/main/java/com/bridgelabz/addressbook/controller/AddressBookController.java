@@ -52,7 +52,7 @@ public class AddressBookController {
     @DeleteMapping("/delete/{contactId}")
     public ResponseEntity<ResponseDTO> deleteContactData(@PathVariable("contactId") int contactId) {
         iAddressBookService.deleteContact(contactId);
-        ResponseDTO responseDTO = new ResponseDTO("Delete Contact Data for Id ", "deleted id:" + contactId);
+        ResponseDTO responseDTO = new ResponseDTO("Delete Contact Data for Id ", + contactId);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 }
