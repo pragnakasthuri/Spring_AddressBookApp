@@ -1,41 +1,58 @@
 package com.bridgelabz.addressbook.controller;
 
 import com.bridgelabz.addressbook.dto.ContactDTO;
+import com.bridgelabz.addressbook.dto.ResponseDTO;
 import com.bridgelabz.addressbook.model.Contact;
+import com.bridgelabz.addressbook.service.IAddressBookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/addressbook")
 public class AddressBookController {
 
-    @RequestMapping("/get")
-    public ResponseEntity<String> getContactData(){
-        Contact contact = null;
-        contact = new Contact(1, new ContactDTO("Pragna", "Kasthuri"));
-        return new ResponseEntity<String>("Get Call Success" +contact, HttpStatus.OK);
+    @Autowired
+    private IAddressBookService iAddressBookService;
+
+    @RequestMapping(value = { "", "/", "/get" })
+    public ResponseEntity<ResponseDTO> getContactData() {
+    List<Contact> contactList = iAddressBookService.getContact();
+    ResponseDTO responseDTO = new ResponseDTO("Get call Success", contactList);
+    return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<String> getContactDataById(@PathVariable("id") int id) {
-        Contact contact = null;
-        contact = new Contact(1, new ContactDTO("Pragna", "Kasthuri"));
-        return new ResponseEntity<String>("Get Call Success For Id " +id  +contact, HttpStatus.OK);
+
+    @GetMapping("/get/{contactId}")
+    public ResponseEntity<ResponseDTO> getContactDataById(@PathVariable("contactId") int contactId) {
+        Contact contact = iAddressBookService.getContactById(contactId);
+        ResponseDTO responseDTO = new ResponseDTO("Get call Success for id", contact);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createContact(@RequestBody Contact contact) {
-        return new ResponseEntity<String>("Contact Added Successfully" +contact, HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> addContactData(@RequestBody ContactDTO contactDTO) {
+        Contact contact = iAddressBookService.createContact(contactDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Contact Added Successfully", contact);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
-        return new ResponseEntity<String>("Updated Contact Data Successfully" +contact, HttpStatus.OK);
+    @PutMapping("/update/{contactId}")
+    public ResponseEntity<ResponseDTO> updateContactData(@PathVariable("contactId") int contactId, @RequestBody ContactDTO contactDTO) {
+        Contact contact = iAddressBookService.updateContact(contactId, contactDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Updated Contact data Successfully", contact);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteContact(@PathVariable("id") int id) {
-        return new ResponseEntity<String>("Deleted contact for Id " + id, HttpStatus.OK);
+    @DeleteMapping("/delete/{contactId}")
+    public ResponseEntity<ResponseDTO> deleteContactData(@PathVariable("contactId") int contactId) {
+        iAddressBookService.deleteContact(contactId);
+        ResponseDTO responseDTO = new ResponseDTO("Delete Contact Data for Id ", "deleted id:" + contactId);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 }
