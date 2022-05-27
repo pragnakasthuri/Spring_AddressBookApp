@@ -27,7 +27,7 @@ public @Data class ContactDTO {
     @NotEmpty(message = "City cannot be null")
     public String city;
 
-    @Pattern(regexp = "^[A-Za-z]{2,}$", message = "State Name is Invalid")
+    @Pattern(regexp = "^[A-Za-z\\s]{2,}$", message = "State Name is Invalid")
     @NotEmpty(message = "State cannot be null")
     public String state;
 

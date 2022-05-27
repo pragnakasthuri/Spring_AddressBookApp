@@ -32,16 +32,18 @@ public @Data class Contact {
     public Contact() {
     }
 
-    public Contact(int contactId, ContactDTO contactDTO) {
-        super();
-        this.contactId =  contactId;
-        this.firstName =  contactDTO.firstName;
+    public Contact(ContactDTO contactDTO) {
+        this.updateContact(contactDTO);
+    }
+
+    public void updateContact(ContactDTO contactDTO) {
+        this.firstName = contactDTO.firstName;
         this.lastName = contactDTO.lastName;
-        this.phoneNumber = contactDTO.phoneNumber;
         this.address = contactDTO.address;
         this.city = contactDTO.city;
         this.state = contactDTO.state;
         this.zipcode = contactDTO.zipcode;
-        this.email = contactDTO.email;
+        this.phoneNumber = contactDTO.phoneNumber;
+        this.email=contactDTO.email;
     }
 }
