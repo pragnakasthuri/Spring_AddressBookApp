@@ -56,4 +56,20 @@ public class AddressBookController {
         ResponseDTO responseDTO = new ResponseDTO("Delete Contact Data for Id ", + contactId);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/city/{city}")
+    public ResponseEntity<ResponseDTO> getContactByCity(@PathVariable String city) {
+        List<Contact> contactList = null;
+        contactList = iAddressBookService.getContactByCity(city);
+        ResponseDTO response = new ResponseDTO("Get Call for search by city is successful", contactList);
+        return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/state/{state}")
+    public ResponseEntity<ResponseDTO> getContactByState(@PathVariable String state) {
+        List<Contact> contactList = null;
+        contactList = iAddressBookService.getContactByState(state);
+        ResponseDTO response = new ResponseDTO("Get Call for search by state is successful", contactList);
+        return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
+    }
 }
