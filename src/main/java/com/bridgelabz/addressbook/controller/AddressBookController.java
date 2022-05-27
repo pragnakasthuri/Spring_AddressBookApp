@@ -19,7 +19,7 @@ public class AddressBookController {
     @Autowired
     private IAddressBookService iAddressBookService;
 
-    @RequestMapping(value = { "", "/", "/get" })
+    @GetMapping("/get" )
     public ResponseEntity<ResponseDTO> getContactData() {
     List<Contact> contactList = iAddressBookService.getContact();
     ResponseDTO responseDTO = new ResponseDTO("Get call Success", contactList);
@@ -70,6 +70,21 @@ public class AddressBookController {
         List<Contact> contactList = null;
         contactList = iAddressBookService.getContactByState(state);
         ResponseDTO response = new ResponseDTO("Get Call for search by state is successful", contactList);
+        return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/sortbycity")
+    public ResponseEntity<ResponseDTO> sortByCity() {
+        List<Contact> contactList = null;
+        contactList = iAddressBookService.sortByCity();
+        ResponseDTO response = new ResponseDTO("Get Call  is Successful Sort By City: ", contactList);
+        return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
+    }
+    @GetMapping("/sortbystate")
+    public ResponseEntity<ResponseDTO> sortByState() {
+        List<Contact> contactList = null;
+        contactList = iAddressBookService.sortByState();
+        ResponseDTO response = new ResponseDTO("Get Call  is Successful Sort By City: ", contactList);
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
     }
 }

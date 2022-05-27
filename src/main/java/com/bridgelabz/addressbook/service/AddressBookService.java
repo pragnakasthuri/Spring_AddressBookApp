@@ -57,4 +57,14 @@ public class AddressBookService implements IAddressBookService{
     public List<Contact> getContactByState(String state) {
         return addressBookRepository.findContactListByState(state);
     }
+
+    @Override
+    public List<Contact> sortByCity() {
+        return addressBookRepository.sortByCity();
+    }
+
+    @Override
+    public List<Contact> sortByState() {
+        return addressBookRepository.sortByState();
+    }
 }

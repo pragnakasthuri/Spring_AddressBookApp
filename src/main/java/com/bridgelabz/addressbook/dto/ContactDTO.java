@@ -38,17 +38,4 @@ public @Data class ContactDTO {
     @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", message = "Email is Invalid")
     @NotEmpty(message = "Email cannot be null")
     public String email;
-
-    public ContactDTO(String firstName, String lastName, String phoneNumber, String address, String city,
-                      String state, String zipcode, String email) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipcode = zipcode;
-        this.email = email;
-    }
 }

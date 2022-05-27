@@ -12,6 +12,12 @@ public interface AddressBookRepository extends JpaRepository<Contact, Integer> {
 
     @Query(value = "select * from addressbook_db where state= :state", nativeQuery = true)
     List<Contact> findContactListByState(String state);
+
+    @Query(value = "select * from addressbook_db order by city", nativeQuery = true)
+    List<Contact> sortByCity();
+
+    @Query(value="select * from addressbook_db order by state",nativeQuery = true)
+    List<Contact> sortByState();
 }
 
 
