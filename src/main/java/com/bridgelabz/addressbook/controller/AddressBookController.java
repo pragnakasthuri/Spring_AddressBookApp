@@ -19,7 +19,7 @@ public class AddressBookController {
     @Autowired
     private IAddressBookService iAddressBookService;
 
-    @RequestMapping(value = { "", "/", "/get" })
+    @GetMapping(value = { "", "/", "/get" })
     public ResponseEntity<ResponseDTO> getContactData() {
     List<Contact> contactList = iAddressBookService.getContact();
     ResponseDTO responseDTO = new ResponseDTO("Get call Success", contactList);
