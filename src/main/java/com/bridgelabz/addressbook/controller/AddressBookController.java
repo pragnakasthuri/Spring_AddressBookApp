@@ -77,14 +77,14 @@ public class AddressBookController {
     public ResponseEntity<ResponseDTO> sortByCity() {
         List<Contact> contactList = null;
         contactList = iAddressBookService.sortByCity();
-        ResponseDTO response = new ResponseDTO("Get Call  is Successful Sort By City: ", contactList);
+        ResponseDTO response = new ResponseDTO("Get Call for Sort By City is Successful: ", contactList);
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
     }
     @GetMapping("/sortbystate")
     public ResponseEntity<ResponseDTO> sortByState() {
         List<Contact> contactList = null;
         contactList = iAddressBookService.sortByState();
-        ResponseDTO response = new ResponseDTO("Get Call  is Successful Sort By City: ", contactList);
+        ResponseDTO response = new ResponseDTO("Get Call for Sort By City is Successful: ", contactList);
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
     }
 }
